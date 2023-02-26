@@ -1,0 +1,286 @@
+header nav {
+    height: 30px;
+    background-color: #303030;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+header nav i {
+    margin-right: 10px;
+}
+
+.header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header img {
+    height: 60%;
+    display: inline-block;
+}
+
+.typeofproduct {
+    padding: 0;
+}
+
+.typeofproduct li {
+    display: inline-block;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+.header ul li {
+    font-size: 23px;
+}
+
+.typeofproduct .line {
+    border-right: #e3e2e2 2px solid;
+    margin-top: 38px;
+    height: 23px;
+}
+
+.dropdown {
+    padding: 20px 10px 0 10px;
+}
+
+.dropdown a {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    color: #ff5f17;
+}
+
+.header #discoveryou {
+    height: 40px;
+    position: relative;
+    top: -18px;
+}
+
+.header .search input {
+    width: 250px;
+    height: 35px;
+}
+
+.header button {
+    height: 35px;
+    width: 40px;
+    background-color: #ff5f17;
+    border: 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar #myCarousel {
+    background-color: #f1f1f1;
+    text-align: center;
+    height: 50px;
+    line-height: 2.5;
+}
+
+.slide .item a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.main {
+    margin-top: 35px;
+    padding: 0;
+}
+
+
+.banner {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.row-left-divide {
+    height: 2px;
+    border-top: #303030 2px solid;
+    margin: 2px 0px;
+}
+
+.phan_loai {
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+.phan_loai li {
+    width: 235px;
+    height: 30px;
+    list-style: none;
+    font-size: 16px;
+    padding: 4px 15px 4px 20px;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+.phan_loai li a{
+    text-decoration: none;
+    color: black;
+}
+.phan_loai h3 {
+    color: #ff5f17;
+    font-weight: 600;
+}
+
+.phan_loai li:hover {
+    background-color: #f1f1f1;
+}
+
+.product {
+    display: inline-block;
+    color: #303030;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+.product:hover{
+    text-decoration: none;
+}
+.product img {
+    width: 100%;
+}
+
+.product .info {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.product .info .name,
+.info .gia {
+    font-weight: 600;
+}
+
+.product .info .name:hover {
+    color: #ff5f17;
+}
+
+
+
+.yeu_thich {
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0);
+    -webkit-text-stroke: 2px #ff5f17;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.yeu_thich:hover {
+    color: #ff5f17;
+}
+
+.mua_ngay {
+    display: none;
+    width: 150px;
+    height: 50px;
+    color: #fff;
+    background-color: #ff5f17;
+    text-align: center;
+    padding: 10px 12px 6px 12px;
+    border: 0.8px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 20%;
+}
+
+.mua_ngay h4{
+    font-weight: 600;
+}
+
+.button{
+    width: 100%;
+    position: absolute;
+    top: 212px;
+}
+
+.product:hover .mua_ngay
+{
+    display: inline-block;
+}
+
+
+footer{
+    height: 400px;
+    background-color: #4c4c4c;
+    margin-top: 80px;
+}
+
+footer .f-div{
+    height: 150px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+#social{
+    display: block;
+}
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+footer a{
+    display: block;
+    font-size: 16px;
+    color: #cccccc;
+}
+
+footer a:hover{
+    text-decoration: none;
+    color: #ff5f17;
+
+}
+
+.f-title{
+    font-size: 23px;
+    font-weight: 600;
+    color: white;
+}
+
+.f-title:hover{
+    color: #ff5f17;
+}
+
+#social_media img{
+    width: 60%;
+}
+
+#social a{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#social i{
+    font-size: 50px;
+}
