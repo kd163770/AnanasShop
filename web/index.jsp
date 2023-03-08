@@ -4,8 +4,8 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +19,17 @@
         <script src="bootstrap-3.4.1-dist/js/bootstrap.js"></script>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="themify-icons/themify-icons.css">
+        <style>
+            .profile{
+                position:relative;
+            }
+            .profile ul{
+                position: absolute;
+                list-style: none;
+            }
+        </style>
     </head>
+
     <%
                 response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
                 response.setHeader("Pragma", "no-cache"); //HTTP 1.0
@@ -30,11 +40,19 @@
         <header>
             <nav>
                 <i class="ti-heart"></i>
-                <a href="">Yêu thích</a>
-                <i class="ti-user"></i>
-                <a href="">Đăng nhập</a>
+                <a href="login.jsp">Yêu thích</a> 
                 <i class="ti-bag"></i>
-                <a href="">Giỏ hàng</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng(<span>${cookie.soluong.value}</span>)</a>
+                <i class="ti-user"></i>
+                <c:choose>
+                    <c:when test="${sessionScope.name == null}">
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
+                    </c:when>
+                    <c:when test="${sessionScope.name != null}">
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
+                    </c:when>
+                </c:choose>
             </nav>
 
             <div class="header">
@@ -45,16 +63,16 @@
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="listshoe?type=NAM">NAM</a>
+                        <a href="listshoe?gioitinh=nam">NAM</a>
 
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="listshoe?type=NU">NỮ</a>
+                        <a href="listshoe?gioitinh=nu">NỮ</a>
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="saleoff">SALE OFF</a>
+                        <a href="listshoesale">SALE OFF</a>
 
                     </li>
                     <li class="line"></li>
@@ -64,10 +82,10 @@
                 </ul>
 
 
-                <div class="search" style="z-index: 10">
+                <div class="search" style="z-index: 1">
                     <form action="search" method="GET">
                         <input type="text" placeholder="Tìm kiếm" name="search" value="">
-                        <button style="z-index: 1;" onclick="this.form.submit()">  
+                        <button  onclick="this.form.submit()">  
                             <i class="ti-search"></i>
                         </button>
                     </form>
@@ -138,7 +156,7 @@
                     <p class="content">Mặc dù được ứng dụng rất nhiều, nhưng sắc đen lúc nào cũng toát lên một vẻ huyền bí
                         không nhàm chán</p>
                 </a>
-                <a class="sale col-md-6" href="saleoff" style="text-decoration: none; color: black">
+                <a class="sale col-md-6" href="listshoesale" style="text-decoration: none; color: black">
                     <img src="image/Banner_Sale-off-1.jpg" alt="">
                     <p class="title">OUTLET SALE</p>
                     <p class="content">Danh mục những sản phẩm bán tại "giá tốt hơn" chỉ được bán kênh online - Online Only,
@@ -157,9 +175,9 @@
                     </div>
                     <div class="link">
                         <a href="listshoe?type=NAM" class="title">GIÀY NAM</a>
-                        <a href="">New Arrivals</a>
+                        <a href="newarrival?gioitinh=NAM">New Arrivals</a>
                         <a href="">Best Seller</a>
-                        <a href="">Sale-off</a>
+                        <a href="listshoesale?gioitinh=NAM">Sale-off</a>
                     </div>
                 </div>
 
@@ -170,9 +188,9 @@
                     </div>
                     <div class="link">
                         <a href="listshoe?type=NU" class="title">GIÀY NỮ</a>
-                        <a href="">New Arrivals</a>
+                        <a href="newarrival?gioitinh=NU">New Arrivals</a>
                         <a href="">Best Seller</a>
-                        <a href="">Sale-off</a>
+                        <a href="listshoesale?gioitinh=NU">Sale-off</a>
                     </div>
                 </div>
 
@@ -183,10 +201,10 @@
                     </div>
                     <div class="link">
                         <a href="" class="title">DÒNG SẢN PHẨM</a>
-                        <a href="">Basas</a>
-                        <a href="">Vintas</a>
-                        <a href="">Urbas</a>
-                        <a href="">Pattas</a>
+                        <a href="listloaigiay?loaigiay=1">Basas</a>
+                        <a href="listloaigiay?loaigiay=3">Vintas</a>
+                        <a href="listloaigiay?loaigiay=2">Urbas</a>
+                        <a href="listloaigiay?loaigiay=4">Pattas</a>
                     </div>
                 </div>
             </div>

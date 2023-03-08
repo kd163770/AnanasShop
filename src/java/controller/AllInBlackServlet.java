@@ -1,5 +1,8 @@
 package controller;
 
+import entity.KieuDang;
+import entity.LoaiGiay;
+import entity.Shoe;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,9 +15,15 @@ public class AllInBlackServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        ShoeDAO u = new ShoeDAO();
+         ShoeDAO u = new ShoeDAO();
+        KieuDangDAO l = new KieuDangDAO();
+        LoaiGiayDAO g = new LoaiGiayDAO();
         List<Shoe> lst = u.allInBlack();
+        List<KieuDang> kd = l.kieuGiay();
+        List<LoaiGiay> lg = g.loaiGiay();
         request.setAttribute("lst", lst);
+        request.setAttribute("listkd", kd);
+        request.setAttribute("listlg", lg);
         request.getRequestDispatcher("menu.jsp").forward(request, response);
     }
 }

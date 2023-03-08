@@ -1,0 +1,196 @@
+header nav {
+    height: 30px;
+    background-color: #303030;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+header nav i {
+    margin-right: 10px;
+}
+
+.header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header img {
+    height: 60%;
+    display: inline-block;
+}
+
+.typeofproduct {
+    padding: 0;
+}
+
+.typeofproduct li {
+    display: inline-block;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+.header ul li {
+    font-size: 23px;
+}
+
+.typeofproduct .line {
+    border-right: #e3e2e2 2px solid;
+    margin-top: 38px;
+    height: 23px;
+}
+
+.dropdown {
+    padding: 20px 10px 0 10px;
+}
+
+.dropdown a {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    color: #ff5f17;
+}
+
+.header #discoveryou {
+    height: 40px;
+    position: relative;
+    top: -18px;
+}
+
+.header .search input {
+    width: 250px;
+    height: 35px;
+}
+
+.header button {
+    height: 35px;
+    width: 40px;
+    background-color: #ff5f17;
+    border: 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar #myCarousel {
+    background-color: #f1f1f1;
+    text-align: center;
+    height: 50px;
+    line-height: 2.5;
+}
+
+.slide .item a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-style: italic;
+}
+
+footer{
+    height: 400px;
+    background-color: #4c4c4c;
+    margin-top: 80px;
+}
+
+footer .f-div{
+    height: 150px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+#social{
+    display: block;
+}
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+footer a{
+    display: block;
+    font-size: 16px;
+    color: #cccccc;
+}
+
+footer a:hover{
+    text-decoration: none;
+    color: #ff5f17;
+
+}
+
+.f-title{
+    font-size: 23px;
+    font-weight: 600;
+    color: white;
+}
+
+.f-title:hover{
+    color: #ff5f17;
+}
+
+#social_media img{
+    width: 60%;
+}
+
+#social a{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#social i{
+    font-size: 50px;
+}
+
+.button_2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dongia{
+    background-color: #f1f1f1;
+    margin-top: 20px;
+}
+
+.giasp{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.giasp p{
+    font-size: 16px;
+    font-weight: 600;
+    color: #808080;
+}
+
+.tong{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tong p{
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+}

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "model.*" %>
+<%@page import = "entity.*" %>
 <%@page import = "java.util.*" %>
 <%@page import = "java.text.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,6 +22,7 @@
   String loaigiay1;
   String gia = (String)request.getAttribute("gia");
   String gia1;
+  String gioitinh = (String)request.getAttribute("gioitinh");
 %> 
 <html lang="en">
 
@@ -36,17 +38,317 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link rel="stylesheet" href="css/menu.css">
         <link rel="stylesheet" href="themify-icons/themify-icons.css">
-    </head>
+        <style>
+            header nav {
+                height: 30px;
+                background-color: #303030;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+            }
 
+            header nav a {
+                color: white;
+                text-decoration: none;
+                margin-right: 40px;
+            }
+
+            header nav i {
+                margin-right: 10px;
+            }
+
+            .header {
+                width: 100%;
+                height: 150px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .header img {
+                height: 60%;
+                display: inline-block;
+            }
+
+            .typeofproduct {
+                padding: 0;
+            }
+
+            .typeofproduct li {
+                display: inline-block;
+                color: black;
+                font-size: 18px;
+                font-weight: 600;
+                margin-right: 2px;
+                margin-left: 2px;
+            }
+
+            .header ul li {
+                font-size: 23px;
+            }
+
+            .typeofproduct .line {
+                border-right: #e3e2e2 2px solid;
+                margin-top: 38px;
+                height: 23px;
+            }
+
+            .dropdown {
+                padding: 20px 10px 0 10px;
+            }
+
+            .dropdown a {
+                color: black;
+                text-decoration: none;
+            }
+
+            .dropdown a:hover {
+                color: #ff5f17;
+            }
+
+            .header #discoveryou {
+                height: 40px;
+                position: relative;
+                top: -18px;
+            }
+
+            .header .search input {
+                width: 250px;
+                height: 35px;
+            }
+
+            .header button {
+                height: 35px;
+                width: 40px;
+                background-color: #ff5f17;
+                border: 0;
+            }
+
+            .navbar {
+                margin-bottom: 0;
+            }
+
+            .navbar #myCarousel {
+                background-color: #f1f1f1;
+                text-align: center;
+                height: 50px;
+                line-height: 2.5;
+            }
+
+            .slide .item a {
+                text-decoration: none;
+                color: black;
+                font-size: 20px;
+                font-style: italic;
+            }
+
+            .main {
+                margin-top: 35px;
+                padding: 0;
+            }
+
+
+            .banner {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .banner img {
+                width: 100%;
+            }
+
+            .row-left-divide {
+                height: 2px;
+                border-top: #303030 2px solid;
+                margin: 2px 0px;
+            }
+
+            .phan_loai {
+                margin-top: 20px;
+                padding-left: 10px;
+            }
+
+            .phan_loai li {
+                width: 235px;
+                height: 30px;
+                list-style: none;
+                font-size: 16px;
+                padding: 4px 15px 4px 20px;
+                margin-top: 3px;
+                margin-bottom: 5px;
+            }
+
+            .phan_loai li a{
+                text-decoration: none;
+                color: black;
+            }
+            .phan_loai h3 {
+                color: #ff5f17;
+                font-weight: 600;
+            }
+
+            .phan_loai li:hover {
+                background-color: #f1f1f1;
+            }
+
+            .product {
+                display: inline-block;
+                color: #303030;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-top: 20px;
+            }
+
+            .product:hover{
+                text-decoration: none;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+            .product img {
+                width: 100%;
+            }
+
+            .product .info {
+                text-align: center;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .product .info .name,
+            .info .gia {
+                font-weight: 600;
+            }
+
+            .product .info .name:hover {
+                color: #ff5f17;
+            }
+
+
+
+            .yeu_thich {
+                font-size: 30px;
+                color: rgba(255, 255, 255, 0);
+                -webkit-text-stroke: 2px #ff5f17;
+                position: absolute;
+                right: 30px;
+                top: 10px;
+            }
+
+            .yeu_thich:hover {
+                color: #ff5f17;
+            }
+
+            .mua_ngay {
+                display: none;
+                width: 150px;
+                height: 50px;
+                color: #fff;
+                background-color: #ff5f17;
+                text-align: center;
+                padding: 10px 12px 6px 12px;
+                border: 0.8px;
+                box-sizing: border-box;
+                position: absolute;
+                left: 20%;
+            }
+
+            .mua_ngay h4{
+                font-weight: 600;
+            }
+
+            .button{
+                width: 100%;
+                position: absolute;
+                top: 212px;
+            }
+
+            .product:hover .mua_ngay
+            {
+                display: inline-block;
+            }
+
+
+            footer{
+                height: 400px;
+                background-color: #4c4c4c;
+                margin-top: 80px;
+            }
+
+            footer .f-div{
+                height: 150px;
+                display: inline-block;
+                margin-left: 20px;
+                margin-right: 50px;
+            }
+
+            #social{
+                display: block;
+            }
+
+            footer{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+            footer a{
+                display: block;
+                font-size: 16px;
+                color: #cccccc;
+            }
+
+            footer a:hover{
+                text-decoration: none;
+                color: #ff5f17;
+
+            }
+
+            .f-title{
+                font-size: 23px;
+                font-weight: 600;
+                color: white;
+            }
+
+            .f-title:hover{
+                color: #ff5f17;
+            }
+
+            #social_media img{
+                width: 60%;
+            }
+
+            #social a{
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+            }
+
+            #social i{
+                font-size: 50px;
+            }
+        </style>
+    </head>
+    <%
+                response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
+                response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+                response.setDateHeader("Expires", 0);
+    %>
     <body>
         <header>
             <nav>
                 <i class="ti-heart"></i>
                 <a href="">Yêu thích</a>
-                <i class="ti-user"></i>
-                <a href="">Đăng nhập</a>
                 <i class="ti-bag"></i>
-                <a href="">Giỏ hàng</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng(<span>${cookie.soluong.value}</span>)</a>
+                <i class="ti-user"></i>
+                <c:choose>
+                    <c:when test="${sessionScope.name == null}">
+                        <a href="login.jsp">Đăng nhập</a>
+                    </c:when>
+                    <c:when test="${sessionScope.name != null}">
+                        <a href="">${sessionScope.name}</a>
+                    </c:when>
+                </c:choose>
             </nav>
 
             <div class="header typeofproduct">
@@ -58,17 +360,17 @@
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="listshoe?type=1">NAM</a>
+                        <a href="listshoe?gioitinh=nam">NAM</a>
 
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="listshoe?type=2">NỮ</a>
+                        <a href="listshoe?gioitinh=nu">NỮ</a>
 
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="">SALE OFF</a>
+                        <a href="listshoesale">SALE OFF</a>
 
                     </li>
                     <li class="line"></li>
@@ -126,17 +428,18 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="typeofproduct">
+                            <%if(gioitinh == null)%>
                             <li class="dropdown">
-                                <a href="product.jsp">TẤT CẢ</a>
+                                <a href="listshoe">TẤT CẢ</a>
                             </li>
                             <li class="line"></li>
                             <li class="dropdown">
-                                <a href="">NAM</a>
+                                <a href="listshoe?gioitinh=nam">NAM</a>
 
                             </li>
                             <li class="line"></li>
                             <li class="dropdown">
-                                <a href="">NỮ</a>
+                                <a href="listshoe?gioitinh=nu">NỮ</a>
                             </li>
                         </ul>
                         <div class="row-left-divide"></div>
@@ -146,81 +449,81 @@
                             String xID = String.valueOf(x.getId());
                             if(kieudang != null && kieudang.equals(xID) == true) {kieudang1 = null;
                             %>
-                                <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang1%>&loaigiay=<%=loaigiay%>&gia=<%=gia%>   
-                            "><%=x.getName()%></a></li>
-                                    <%   } 
-                                        else{ kieudang1 = xID;  
-                            %>  
-                            <li ><a href="phanloaigiay?kieudang=<%=kieudang1%>&loaigiay=<%=loaigiay%>&gia=<%=gia%>   
-                                  "><%=x.getName()%></a></li>
-                             <%}
-                                }
-                            %>
+                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang1%>&loaigiay=<%=loaigiay%>&gia=<%=gia%>&gioitinh=<%=gioitinh%>   
+                                                                     "><%=x.getName()%></a></li>
+                                <%   } 
+                                    else{ kieudang1 = xID;  
+                                %>  
+                            <li ><a href="phanloaigiay?kieudang=<%=kieudang1%>&loaigiay=<%=loaigiay%>&gia=<%=gia%>&gioitinh=<%=gioitinh%>   
+                                    "><%=x.getName()%></a></li>
+                                <%}
+                                   }
+                                %>
                         </ul>
-                        
+
                         <div class="row-left-divide"></div>
                         <ul class="phan_loai">
-                        <h3>DÒNG SẢN PHẨM</h3>
-                        <% for(LoaiGiay x: listlg) {
-                            String xID = String.valueOf(x.getId());
-                            if(loaigiay != null && loaigiay.equals(xID) == true) {loaigiay1 = null;
+                            <h3>DÒNG SẢN PHẨM</h3>
+                            <% for(LoaiGiay x: listlg) {
+                                String xID = String.valueOf(x.getId());
+                                if(loaigiay != null && loaigiay.equals(xID) == true) {loaigiay1 = null;
                             %>
-                                <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay1%>&gia=<%=gia%> 
-                            "><%=x.getName()%></a></li>
-                                    <%   } 
-                                        else{ loaigiay1 = xID;  
-                            %>  
-                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay1%>&gia=<%=gia%>   
-                                  "><%=x.getName()%></a></li>
-                             <%}
-                                }
-                            %>             
+                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay1%>&gia=<%=gia%>&gioitinh=<%=gioitinh%> 
+                                                                     "><%=x.getName()%></a></li>
+                                <%   } 
+                                    else{ loaigiay1 = xID;  
+                                %>  
+                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay1%>&gia=<%=gia%>&gioitinh=<%=gioitinh%>   
+                                    "><%=x.getName()%></a></li>
+                                <%}
+                                   }
+                                %>             
                         </ul>
                         <div class="row-left-divide"></div>
-                        
-                        
-                        
+
+
+
                         <ul class="phan_loai">
                             <h3>GIÁ</h3>
                             <%
                             if(gia != null && gia.equals("1") == true) {
                             gia1 = null;
                             %>
-                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                            ">>600k</a></li>
-                            <%} 
-                                else{ gia1 = "1";  
-                            %>  
-                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                                  ">>600k</a></li>
-                             <%}
-                            %>
-                            <%
-                            if(gia != null && gia.equals("2") == true) {
-                            gia1 = null;
-                            %>
-                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                            ">500k-599k</a></li>
-                            <%} 
-                                else{ gia1 = "2";  
-                            %>  
-                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                                  ">500k-599k</a></li>
-                             <%}
-                            %>
-                            <%
-                            if(gia != null && gia.equals("3") == true) {
-                            gia1 = null;
-                            %>
-                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                            ">400k-499k</a></li>
-                            <%} 
-                                else{ gia1 = "3";  
-                            %>  
-                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%> 
-                                  ">400k-499k</a></li>
-                             <%}
-                            %>
+                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                                                     ">>600k</a></li>
+                                <%} 
+                                    else{ gia1 = "1";  
+                                %>  
+                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                    ">>600k</a></li>
+                                <%}
+                                %>
+                                <%
+                                if(gia != null && gia.equals("2") == true) {
+                                gia1 = null;
+                                %>
+                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                                                     ">500k-599k</a></li>
+                                <%} 
+                                    else{ gia1 = "2";  
+                                %>  
+                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                    ">500k-599k</a></li>
+                                <%}
+                                %>
+                                <%
+                                if(gia != null && gia.equals("3") == true) {
+                                gia1 = null;
+                                %>
+                            <li style="background-color: #f1f1f1"><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                                                     ">400k-499k</a></li>
+                                <%} 
+                                    else{ gia1 = "3";  
+                                %>  
+                            <li ><a href="phanloaigiay?kieudang=<%=kieudang%>&loaigiay=<%=loaigiay%>&gia=<%=gia1%>&gioitinh=<%=gioitinh%> 
+                                    ">400k-499k</a></li>
+                                <%}
+                                %>
                         </ul>
 
 
@@ -235,19 +538,26 @@
                                 <%
                                 for(Shoe x: lst) {
                                 %>
-                                <a href="product.jsp" class="col-md-4 product">
-                                    <img src="image/productimage/track6_ISEE.jpg" alt="">
+                                <a href="product?masp=<%=x.getId()%>" class="col-md-4 product">
+                                    <img src="image/productimage/<%=x.getId()%>/1.jpg" alt="">
                                     <div class="info">
                                         <p class="name"><%=x.getId()%></p>
                                         <p class="color"><%=x.getName()%></p>
-                                        <p class="gia">
+                                        <span class="gia">
                                             <%
                                             DecimalFormat df = new DecimalFormat("###,###,###");
-                                            String formatted = df.format(x.getPrice());
+                                            String formatted = df.format(x.getPrice()/100*(100-x.getSale_price()));
                                             %>
                                             <%= formatted%>&nbspVND
-
-                                        </p>
+                                        </span>
+                                        <% if(x.getSale_price() != 0){  %>   
+                                        <span style="text-decoration: line-through;">
+                                            <%
+                                            formatted = df.format(x.getPrice());
+                                            %>
+                                            <%= formatted%>&nbspVND
+                                        </span><%
+                                        }%>
                                     </div>
                                     <div class="button">
                                         <div class="mua_ngay">

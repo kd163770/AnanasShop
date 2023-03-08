@@ -5,6 +5,9 @@
 
 package controller;
 
+import entity.LoaiGiay;
+import entity.KieuDang;
+import entity.Shoe;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import entity.*;
 import model.*;
 
 
@@ -62,10 +66,12 @@ public class PhanLoaiGiayServlet extends HttpServlet {
        String kieudang = request.getParameter("kieudang");
        String loaigiay = request.getParameter("loaigiay");
        String gia = request.getParameter("gia");
+       String gioitinh = request.getParameter("gioitinh");
        
        if(kieudang.equals("null")) kieudang="";
        if(loaigiay.equals("null")) loaigiay="";
        if(gia.equals("null")) gia="";
+       if(gioitinh.equals("null")) gioitinh="";
        
        String dongsanpham = request.getParameter("dongsanpham");
        ShoeDAO shoe = new ShoeDAO();
@@ -73,10 +79,11 @@ public class PhanLoaiGiayServlet extends HttpServlet {
        LoaiGiayDAO g = new LoaiGiayDAO();
        List<KieuDang> kd = l.kieuGiay();
        List<LoaiGiay> lg = g.loaiGiay();
-       List<Shoe> d = shoe.phanLoai(kieudang, loaigiay, gia);
+       List<Shoe> d = shoe.phanLoai(kieudang, loaigiay, gia, gioitinh);
        request.setAttribute("kieudang", kieudang);
        request.setAttribute("loaigiay", loaigiay);
        request.setAttribute("gia", gia);
+       request.setAttribute("gioitinh", gioitinh);
        request.setAttribute("lst", d);
        request.setAttribute("listkd", kd);
        request.setAttribute("listlg", lg);
