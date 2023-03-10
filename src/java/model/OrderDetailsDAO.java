@@ -34,7 +34,7 @@ public class OrderDetailsDAO extends DBContext{
     }
     
     public List<OrderDetails> getOrderDetails(int id){
-        String sql = "select * from [Order_Details] where id = ?";
+        String sql = "select * from [Order Details] where ID = ?";
         List<OrderDetails> orders = new ArrayList();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -54,5 +54,23 @@ public class OrderDetailsDAO extends DBContext{
             e.printStackTrace();
         }
         return orders;
+    }
+    
+    public List<String> listBestSeller(String gioitinh) {
+        List<String> s = new ArrayList();
+        String sql = "select top(3) od.masp, count(od.masp)  from [order details] od inner join san_pham sp on od.masp = sp.masp where gioi_tinh <> ? group by od.masp";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, gioitinh);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+              String x = rs.getString("masp");
+              s.add(x);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
     }
 }

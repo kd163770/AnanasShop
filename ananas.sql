@@ -548,3 +548,11 @@ Select Top(1) id from orders order by id desc
 select * from so_luong where masp = 'A6T006'and size_giay=37
 
 Update so_luong set so_luong = 9 where masp = 'AV00195' and size = 39
+update orders set trang_thai = 2 where id = 3
+select * from san_pham
+select count(so_luong), masp from [order details] group by masp
+select [order details].masp, san_pham.gioi_tinh from [order details] inner join san_pham on [order details].masp = san_pham.masp group by [order details].masp,san_pham.gioi_tinh order by count(so_luong) desc
+
+select top(3) od.masp, count(od.masp)  from [order details] od inner join san_pham sp on od.masp = sp.masp where gioi_tinh <> 'NU' group by od.masp
+
+Select * from san_pham where gia_sale <> 0

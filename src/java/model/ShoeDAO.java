@@ -53,17 +53,16 @@ public class ShoeDAO extends DBContext {
         return s;
     }
 
+     
     public List<Shoe> listSaleShoe(String gt) {
         List<Shoe> s = new ArrayList();
-        String sql = "";
-        if (gt != null && !gt.isEmpty()) {
-            sql = "Select * from san_pham where (gioi_tinh = ? or gioi_tinh='UNISEX') and gia_sale <> 0";
-        } else {
-            sql = "Select * from san_pham where gia_sale <> 0";
+        String sql = "Select * from san_pham where gia_sale <> 0";
+        if (gt.equals("")== false) {
+            sql = sql + " and (gioi_tinh = '"+gt+"' or gioi_tinh='UNISEX')";
         }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, gt);
+//            st.setString(1, gt);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Shoe d = new Shoe();
@@ -82,6 +81,7 @@ public class ShoeDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return s;
     }
 
@@ -311,7 +311,7 @@ public class ShoeDAO extends DBContext {
     }
     public static void main(String[] args) {
         ShoeDAO sh = new ShoeDAO();
-        List<Shoe> s = sh.listShoe(null);
-
+        List<Shoe> s = sh.listSaleShoe("NAM");
+        
     }
 }

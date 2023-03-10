@@ -60,6 +60,7 @@ public class ListSaleShoe extends HttpServlet {
     throws ServletException, IOException {
        ShoeDAO u = new ShoeDAO();
         String gt = request.getParameter("gioitinh");
+        if(gt == null) gt = "";
         List<Shoe> lst = u.listSaleShoe(gt);
         request.setAttribute("lst", lst);
         request.getRequestDispatcher("clearance-sale.jsp").forward(request, response);

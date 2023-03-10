@@ -336,17 +336,23 @@
     <body>
         <header>
             <nav>
-                <i class="ti-heart"></i>
-                <a href="">Yêu thích</a>
+                 <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
                 <i class="ti-bag"></i>
-                <a style="z-index: 1;" href="giohang">Giỏ hàng(<span>${cookie.soluong.value}</span>)</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
                 <i class="ti-user"></i>
                 <c:choose>
                     <c:when test="${sessionScope.name == null}">
-                        <a href="login.jsp">Đăng nhập</a>
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
                     </c:when>
                     <c:when test="${sessionScope.name != null}">
-                        <a href="">${sessionScope.name}</a>
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
                     </c:when>
                 </c:choose>
             </nav>

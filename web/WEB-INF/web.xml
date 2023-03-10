@@ -84,6 +84,10 @@
         <servlet-name>UserCartServlet</servlet-name>
         <servlet-class>controller.UserCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BestSellerServlet</servlet-name>
+        <servlet-class>controller.BestSellerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListShoeServlet</servlet-name>
         <url-pattern>/listshoe</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>UserCartServlet</servlet-name>
         <url-pattern>/usercart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BestSellerServlet</servlet-name>
+        <url-pattern>/bestseller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

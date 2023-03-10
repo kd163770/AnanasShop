@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -235,48 +236,62 @@
 <body>
     <header>
         <nav>
-            <i class="ti-heart"></i>
-            <a href="">Yêu thích</a>
-            <i class="ti-user"></i>
-            <a href="">Đăng nhập</a>
-            <i class="ti-bag"></i>
-            <a href="">Giỏ hàng</a>
+            <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
+                <i class="ti-bag"></i>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
+                <i class="ti-user"></i>
+                <c:choose>
+                    <c:when test="${sessionScope.name == null}">
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
+                    </c:when>
+                    <c:when test="${sessionScope.name != null}">
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
+                    </c:when>
+                </c:choose>
         </nav>
 
         <div class="header">
             <img src="image/logoananas.png" alt="">
-            <ul>
-                <li class="dropdown">
-                    <a href="menu.html">SẢN PHẨM</a>
-                </li>
-                <li class="line"></li>
-                <li class="dropdown">
-                    <a href="menu.html">NAM</a>
+             <ul>
+                    <li class="dropdown">
+                        <a href="listshoe">SẢN PHẨM</a>       
+                    </li>
+                    <li class="line"></li>
+                    <li class="dropdown">
+                        <a href="listshoe?gioitinh=nam">NAM</a>
 
-                </li>
-                <li class="line"></li>
-                <li class="dropdown">
-                    <a href="menu.html">NỮ</a>
+                    </li>
+                    <li class="line"></li>
+                    <li class="dropdown">
+                        <a href="listshoe?gioitinh=nu">NỮ</a>
+                    </li>
+                    <li class="line"></li>
+                    <li class="dropdown">
+                        <a href="listshoesale">SALE OFF</a>
 
-                </li>
-                <li class="line"></li>
-                <li class="dropdown">
-                    <a href="">SALE OFF</a>
+                    </li>
+                    <li class="line"></li>
+                    <li>
+                        <img src="image/news_discover.png" id="discoveryou" alt="">
+                    </li>
+                </ul>
 
-                </li>
-                <li class="line"></li>
-                <li>
-                    <img src="image/news_discover.png" id="discoveryou" alt="">
-                </li>
-            </ul>
 
-            <div class="search">
-                <input type="text" placeholder="Tìm kiếm">
-                <button>
-                    <i class="ti-search"></i>
-                </button>
-
-            </div>
+                <div class="search" style="z-index: 1">
+                    <form action="search" method="GET">
+                        <input type="text" placeholder="Tìm kiếm" name="search" value="">
+                        <button  onclick="this.form.submit()">  
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                </div>
         </div>
     </header>
 
@@ -318,13 +333,13 @@
             <div class="row">
                 <div class="col-md-3 menu" style="background-color: white;">
                     <div id="profile">
-                        <a href="">Thông tin tài khoản &nbsp;<i class="ti-user"></i></a> <br />
+                        <a href="user">Thông tin tài khoản &nbsp;<i class="ti-user"></i></a> <br />
                     </div>
                     <div id="changepassword">
                         <a href="">Đổi mật khẩu &nbsp;<i class="ti-exchange-vertical"></i></a> <br />
                     </div>
                     <div>
-                        <a href="cart">Đơn hàng &nbsp;<i class="ti-shopping-cart-full"></i></a>
+                        <a href="usercart">Đơn hàng &nbsp;<i class="ti-shopping-cart-full"></i></a>
                     </div>
                 </div>
                 <div class="col-md-9 main">

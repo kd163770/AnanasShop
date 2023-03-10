@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import entity.*;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 /**
@@ -30,6 +31,7 @@ public class ThemVaoGioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session= request.getSession();
         PrintWriter out = response.getWriter();
         ShoeDAO sd = new ShoeDAO();
         List<Shoe> lst = sd.listShoe(null);
@@ -65,12 +67,7 @@ public class ThemVaoGioServlet extends HttpServlet {
             } else {
                 n = 0;
             }
-            String txtsl = "";
-            txtsl = String.valueOf(n);
-            Cookie d = new Cookie("soluong", txtsl);
-            d.setMaxAge(2 * 24 * 60 * 60);
-            response.addCookie(d);
-
+             session.setAttribute("soluong", n);
             ShoeDAO s = new ShoeDAO();
             Shoe shoe = s.searchProduct(masp);
 
@@ -97,11 +94,7 @@ public class ThemVaoGioServlet extends HttpServlet {
             } else {
                 n = 0;
             }
-            String txtsl = "";
-            txtsl = String.valueOf(n);
-            Cookie d = new Cookie("soluong", txtsl);
-            d.setMaxAge(2 * 24 * 60 * 60);
-            response.addCookie(d);
+            session.setAttribute("soluong", n);
             request.setAttribute("lst", listItem);
             request.setAttribute("size", n);
 
@@ -120,62 +113,6 @@ public class ThemVaoGioServlet extends HttpServlet {
 //out.print(txt);
     }
 
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        ShoeDAO sd = new ShoeDAO();
-//        List<Shoe> lst = sd.listShoe(null);
-//        Cookie[] arr = request.getCookies();
-//        String txt = "";
-//        if (arr != null) {
-//            for (Cookie o : arr) {
-//                if (o.getName().equals("cart")) {
-//                    txt += o.getValue();
-//                    o.setMaxAge(0);
-//                    response.addCookie(o);
-//                }
-//            }
-//        }
-//        String masp = request.getParameter("masp");
-//        String soluong = request.getParameter("soluong");
-//        String size = request.getParameter("size");
-//        if (txt.isEmpty() || txt.equals("")) {
-//            txt = masp + ":" + size + ":" + soluong;
-//        } else {
-//            txt = txt + "/" + masp + ":" + size + ":" + soluong;
-//        }
-//        Cookie c = new Cookie("cart", txt);
-//        c.setMaxAge(2 * 24 * 60 * 60);
-//        response.addCookie(c);
-//
-//        Cart cart = new Cart(txt, lst);
-//        List<Item> listItem = cart.getItems();
-//        int n;
-//        if (listItem != null) {
-//            n = listItem.size();
-//        } else {
-//            n = 0;
-//        }
-//        String txtsl = "";
-//        txtsl = String.valueOf(n);
-//        Cookie d = new Cookie("soluong", txtsl);
-//        d.setMaxAge(2 * 24 * 60 * 60);
-//        response.addCookie(d);
-//        
-//        ShoeDAO s = new ShoeDAO();
-//        Shoe shoe = s.searchProduct(masp);
-//
-//        int soluong2 = s.soLuong(masp, size);
-//
-//        request.setAttribute("size", size);
-//        request.setAttribute("shoe", shoe);
-//        List<Shoe> lst1 = s.relateProduct(masp, String.valueOf(shoe.getLoai_giay()));
-//        request.setAttribute("soluong", soluong2);
-//        request.setAttribute("lst", lst1);
-//        request.getRequestDispatcher("giohang").forward(request, response);
-//    }
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -94,6 +94,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
         request.setAttribute("phonenumber", c.getSdt());
         request.setAttribute("name", c.getHo_ten());
         request.setAttribute("gender", c.getGioi_tinh());
+        request.setAttribute("address", c.getDia_chi());
 //            out.print(c.getGioi_tinh());
         request.getRequestDispatcher("userprofile.jsp").forward(request, response);
     }

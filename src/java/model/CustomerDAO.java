@@ -28,6 +28,7 @@ public class CustomerDAO extends DBContext {
             if (rs.next()) {
                 account.setUsername(rs.getString("id"));
                 account.setPassword(rs.getString("password"));
+                account.setVai_tro(rs.getInt("vai_tro"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,6 +50,7 @@ public class CustomerDAO extends DBContext {
                 c.setGioi_tinh(rs.getString("Gioi_tinh"));
                 c.setEmail(rs.getString("email"));
                 c.setSdt(rs.getString("so_dien_thoai"));
+                c.setDia_chi(rs.getString("Dia_chi"));
                 c.setVai_tro(rs.getInt("vai_tro"));
             }
         } catch (Exception e) {

@@ -29,6 +29,7 @@ public class GioHangServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         ShoeDAO sd = new ShoeDAO();
         List<Shoe> lst = sd.listShoe(null);
         Cookie[] arr = request.getCookies();
@@ -51,14 +52,9 @@ public class GioHangServlet extends HttpServlet {
         } else {
             n = 0;
         }
-        String txtsl = "";
-        txtsl = String.valueOf(n);
-        Cookie c = new Cookie("soluong", txtsl);
-        c.setMaxAge(2 * 24 * 60 * 60);
-        response.addCookie(c);
         request.setAttribute("lst", listItem);
         request.setAttribute("size", n);
-
+         session.setAttribute("soluong", n);
         //
         Double s1 = totalMoney;
         Double s2 = saleMoney;
@@ -113,11 +109,7 @@ public class GioHangServlet extends HttpServlet {
             } else {
                 n = 0;
             }
-            String txtsl = "";
-            txtsl = String.valueOf(n);
-            Cookie c = new Cookie("soluong", txtsl);
-            c.setMaxAge(2 * 24 * 60 * 60);
-            response.addCookie(c);
+            
             request.setAttribute("lst", listItem);
             request.setAttribute("size", n);
 

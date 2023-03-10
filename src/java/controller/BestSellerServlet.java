@@ -11,7 +11,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
@@ -20,7 +19,7 @@ import model.*;
  *
  * @author Admin
  */
-public class UserCartServlet extends HttpServlet {
+public class BestSellerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class UserCartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserCartServlet</title>");
+            out.println("<title>Servlet BestSellerServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BestSellerServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,24 +61,25 @@ public class UserCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        ShoeDAO sd = new ShoeDAO();
-        OrderDAO o = new OrderDAO();
+        ShoeDAO u = new ShoeDAO();
         OrderDetailsDAO od = new OrderDetailsDAO();
-        String name = (String) session.getAttribute("name");
-        List<Order> order = o.getOrders(name);
-        List<OrderDetails> orderdetails = new ArrayList();
-        for (int i = 0; i <order.size(); i++) {
-            List<OrderDetails> od2 = od.getOrderDetails(order.get(i).getId());
-            for (OrderDetails orderDetails : od2) {
-                orderDetails.setShoe(sd.searchProduct(orderDetails.getMasp()));
-                orderdetails.add(orderDetails);
-            }
+        KieuDangDAO l = new KieuDangDAO();
+        LoaiGiayDAO g = new LoaiGiayDAO();
+        String gt = request.getParameter("gioitinh");
+
+        List<String> lstr = od.listBestSeller(gt);
+        List<Shoe> lst = new ArrayList();
+        for (String st : lstr) {
+            Shoe shoe = u.searchProduct(st);
+            lst.add(shoe);
         }
-//        out.print(orderdetails.size());
-         request.setAttribute("order", order);
-         request.setAttribute("orderdetails", orderdetails);
-         request.getRequestDispatcher("userorder.jsp").forward(request, response);
+        List<KieuDang> kd = l.kieuGiay();
+        List<LoaiGiay> lg = g.loaiGiay();
+        request.setAttribute("lst", lst);
+        request.setAttribute("listkd", kd);
+        request.setAttribute("listlg", lg);
+//        request.setAttribute("gioitinh", gt);
+        request.getRequestDispatcher("menu.jsp").forward(request, response);
     }
 
     /**

@@ -39,10 +39,15 @@
 
         <header>
             <nav>
-                <i class="ti-heart"></i>
-                <a href="login.jsp">Yêu thích</a> 
+                <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
                 <i class="ti-bag"></i>
-                <a style="z-index: 1;" href="giohang">Giỏ hàng(<span>${cookie.soluong.value}</span>)</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
                 <i class="ti-user"></i>
                 <c:choose>
                     <c:when test="${sessionScope.name == null}">
@@ -176,7 +181,7 @@
                     <div class="link">
                         <a href="listshoe?type=NAM" class="title">GIÀY NAM</a>
                         <a href="newarrival?gioitinh=NAM">New Arrivals</a>
-                        <a href="">Best Seller</a>
+                        <a href="bestseller?gioitinh=NAM">Best Seller</a>
                         <a href="listshoesale?gioitinh=NAM">Sale-off</a>
                     </div>
                 </div>
@@ -189,7 +194,7 @@
                     <div class="link">
                         <a href="listshoe?type=NU" class="title">GIÀY NỮ</a>
                         <a href="newarrival?gioitinh=NU">New Arrivals</a>
-                        <a href="">Best Seller</a>
+                        <a href="bestseller?gioitinh=NU">Best Seller</a>
                         <a href="listshoesale?gioitinh=NU">Sale-off</a>
                     </div>
                 </div>
@@ -221,7 +226,6 @@
                 <p class="f-title">SẢN PHẨM</p>
                 <a href="">Giày nam</a>
                 <a href="">Giày nữ</a>
-                <a href="">Thời Trang & Phụ kiện</a>
                 <a href="">Sale-off</a>
             </div>
 

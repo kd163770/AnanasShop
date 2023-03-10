@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import entity.*;
+import java.util.List;
 import model.*;
 
 /**
@@ -28,7 +29,6 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,6 +38,8 @@ public class LoginServlet extends HttpServlet {
         String name = (String) request.getParameter("name");
         String password = (String) request.getParameter("password");
         String remember = (String) request.getParameter("remember");
+        Cookie[] arr = request.getCookies();
+
         CustomerDAO lg = new CustomerDAO();
         Customer account = lg.searchUser(name, password);
 
@@ -46,9 +48,10 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("err", err);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            Cookie[] arr = request.getCookies();
+
             String username = "";
             String passwordcookie = "";
+            int status = account.getVai_tro();
             if (remember == null) {
                 if (arr != null) {
                     for (Cookie o : arr) {
@@ -62,25 +65,42 @@ public class LoginServlet extends HttpServlet {
                         }
                     }
                 }
-            }
-            else{
-                username=name;
-                passwordcookie=password;
+            } else {
+                username = name;
+                passwordcookie = password;
                 Cookie name_cookie = new Cookie("name", username);
                 Cookie pass_cookie = new Cookie("pass", passwordcookie);
-                name_cookie.setMaxAge(2*24*60*60);
-                pass_cookie.setMaxAge(2*24*60*60);
+                name_cookie.setMaxAge(2 * 24 * 60 * 60);
+                pass_cookie.setMaxAge(2 * 24 * 60 * 60);
                 response.addCookie(name_cookie);
                 response.addCookie(pass_cookie);
             }
-
+            ShoeDAO sd = new ShoeDAO();
+            List<Shoe> lst = sd.listShoe(null);
+            String txt = "";
+            if (arr != null) {
+                for (Cookie o : arr) {
+                    if (o.getName().equals("cart")) {
+                        txt += o.getValue();
+                    }
+                }
+            }
+            Cart cart = new Cart(txt, lst);
+            List<Item> listItem = cart.getItems();
+            int n;
+            if (listItem != null) {
+                n = listItem.size();
+            } else {
+                n = 0;
+            }
             session.setAttribute("name", name);
             session.setAttribute("password", password);
+            session.setAttribute("status", status);
+            session.setAttribute("soluong", n);
             response.sendRedirect("index.jsp");
         }
 
     }
-
 
     @Override
     public String getServletInfo() {

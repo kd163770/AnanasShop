@@ -240,17 +240,23 @@
     <body>
         <header>
             <nav>
-                <i class="ti-heart"></i>
-                <a href="">Yêu thích</a>
+                <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
                 <i class="ti-bag"></i>
-                <a style="z-index: 1;" href="giohang">Giỏ hàng(<span>${cookie.soluong.value}</span>)</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
                 <i class="ti-user"></i>
                 <c:choose>
                     <c:when test="${sessionScope.name == null}">
-                        <a href="login.jsp">Đăng nhập</a>
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
                     </c:when>
                     <c:when test="${sessionScope.name != null}">
-                        <a href="">${sessionScope.name}</a>
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
                     </c:when>
                 </c:choose>
             </nav>
@@ -338,7 +344,7 @@
                             <input type="text" placeholder="HỌ TÊN" class="cus-info" value="${requestScope.cus.ho_ten}" name="name">
                             <input type="text" placeholder="Số điện thoại" class="cus-info" value="${requestScope.cus.sdt}" name="phonenumber">
                             <input type="text" placeholder="Email" class="cus-info" value="${requestScope.cus.email}" name="email">
-                            <input type="text" placeholder="Địa chỉ" class="cus-info" name="address">
+                            <input type="text" placeholder="Địa chỉ" class="cus-info" value="${requestScope.cus.dia_chi}" name="address">
 
                             <div style="display: block; width: 100%; height: 42px; padding: 5px 20px 5px 20px; background-color: #f1f1f1;">
                                 <p style="font-weight: 600; font-size: 20px; line-height: 2;">PHƯƠNG THỨC GIAO HÀNG</p>
@@ -413,7 +419,6 @@
                 <p class="f-title">SẢN PHẨM</p>
                 <a href="">Giày nam</a>
                 <a href="">Giày nữ</a>
-                <a href="">Thời Trang & Phụ kiện</a>
                 <a href="">Sale-off</a>
             </div>
 

@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "model.*" %>
+<%@page import = "entity.*" %>
+<%@page import = "java.util.*" %>
+<%@page import = "java.text.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -272,7 +278,6 @@
             .gia{
                 display: inline-block;
                 text-align: right;
-                line-height: 150px;
                 width: 150px;
             }
             .huydon{
@@ -294,6 +299,10 @@
                 border: 0;
                 color: white;
             }
+            .nav_child a{
+                text-decoration: none;
+                color: black;
+            }
         </style>
         <script>
             function navbar(x) {
@@ -309,40 +318,52 @@
 
         <%
             List<Order> o = (List<Order>)request.getAttribute("order");
-            List<OrderDetails2> od = (List<OrderDetails2>)request.getAttribute("order");
+            List<OrderDetails> od = (List<OrderDetails>)request.getAttribute("orderdetails");
         %>
     </head>
 
     <body>
         <header>
             <nav>
-                <i class="ti-heart"></i>
-                <a href="">Yêu thích</a>
-                <i class="ti-user"></i>
-                <a href="">Đăng nhập</a>
+                <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
                 <i class="ti-bag"></i>
-                <a href="">Giỏ hàng</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
+                <i class="ti-user"></i>
+                <c:choose>
+                    <c:when test="${sessionScope.name == null}">
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
+                    </c:when>
+                    <c:when test="${sessionScope.name != null}">
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
+                    </c:when>
+                </c:choose>
             </nav>
 
             <div class="header">
                 <img src="image/logoananas.png" alt="">
-                <ul>
+                 <ul>
                     <li class="dropdown">
-                        <a href="menu.html">SẢN PHẨM</a>
+                        <a href="listshoe">SẢN PHẨM</a>       
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="menu.html">NAM</a>
+                        <a href="listshoe?gioitinh=nam">NAM</a>
 
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="menu.html">NỮ</a>
-
+                        <a href="listshoe?gioitinh=nu">NỮ</a>
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="">SALE OFF</a>
+                        <a href="listshoesale">SALE OFF</a>
 
                     </li>
                     <li class="line"></li>
@@ -351,11 +372,14 @@
                     </li>
                 </ul>
 
-                <div class="search">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <button>
-                        <i class="ti-search"></i>
-                    </button>
+
+                <div class="search" style="z-index: 1">
+                    <form action="search" method="GET">
+                        <input type="text" placeholder="Tìm kiếm" name="search" value="">
+                        <button  onclick="this.form.submit()">  
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </header>
@@ -398,10 +422,10 @@
                 <div class="row">
                     <div class="col-md-3 menu" style="background-color: white;">
                         <div id="profile">
-                            <a href="">Thông tin tài khoản &nbsp;<i class="ti-user"></i></a> <br />
+                            <a href="user">Thông tin tài khoản &nbsp;<i class="ti-user"></i></a> <br />
                         </div>
                         <div id="changepassword">
-                            <a href="">Đổi mật khẩu &nbsp;<i class="ti-exchange-vertical"></i></a> <br />
+                            <a href="userchangepassword.jsp">Đổi mật khẩu &nbsp;<i class="ti-exchange-vertical"></i></a> <br />
                         </div>
                         <div id="cart">
                             <a href="">Đơn hàng &nbsp;<i class="ti-shopping-cart-full"></i></a>
@@ -410,19 +434,20 @@
                     <div class="col-md-9 main">
                         <form action="">
                             <div class="navbar_cart">
-                                <div class="nav_child" onclick="navbar(0)">Tất cả</div>
-                                <div class="nav_child" onclick="navbar(1)">Đang giao</div>
-                                <div class="nav_child" onclick="navbar(2)">Hoàn thành</div>
-                                <div class="nav_child" onclick="navbar(3)">Đã huỷ</div>                    
+                                <div class="nav_child" onclick="navbar(0)"><a>Tất cả</a></div>
+                                <div class="nav_child" onclick="navbar(1)"><a>Đang giao</a></div>
+                                <div class="nav_child" onclick="navbar(2)"><a>Hoàn thành</a></div>
+                                <div class="nav_child" onclick="navbar(3)"><a>Đã huỷ</a></div>                    
                             </div>
                         </form>
-                        <div class="donhang">
-                            <%
-                                for(int i=0; i<=o.size(); i++)
+                        <%
+                                for(int i=o.size()-1; i>=0; i--)
                                 {
-                            %>
+                        %>
+                        <div class="donhang">
+
                             <div class="cart_info">
-                                <p><%=o.get(i).getId()%></p>
+                                <p>Mã đơn: <%=o.get(i).getId()%></p>
                                 <%if(o.get(i).getStatus() == 1){%>
                                 <h4>ĐANG XỬ LÝ</h4>
                                 <%}else if(o.get(i).getStatus() == 2){%>
@@ -431,66 +456,39 @@
                                 <h4>HOÀN THÀNH</h4>
                                 <%}%>
                             </div>
-                            
+
                             <div style="display:block; width: 95%; height: 1px; background-color: rgb(51, 51, 51); margin-left: 20px; margin-bottom: 10px;"></div>
-                            <%for(int j=0; j<=od.size(); j++){
-                                if(od.get(i).getId() == o.get(i).getId())
+                            <%for(int j=0; j<od.size(); j++){
+                                if(od.get(j).getOrderId() == o.get(i).getId())
                                 {
-                               %>
+                            %>
                             <div class="item_cart">
                                 <div class="product_img">
-                                    <img src="image/productimage/<%=od.get(i).getMasp()%>/1.jpg" alt="">
+                                    <img src="image/productimage/<%=od.get(j).getMasp()%>/1.jpg" alt="">
                                 </div>
                             </div>
                             <div class="info_product">
                                 <div>
-                                    <p>Tên</p>
-                                    <p>Size</p>
-                                    <p>Số lượng</p>                                
+                                    <p style="font-size: 20px; font-weight: 600;"><%=od.get(j).getShoe().getName()%></p>
+                                    <p>Size: <%=od.get(j).getSize()%></p>
+                                    <p>x<%=od.get(j).getQuantity()%></p>                                
                                 </div>
                             </div>
                             <div class="gia">
-                                <p>0000000</p>
-                            </div>
-                            <div class="item_cart">
-                                <div class="product_img">
-                                    <img src="image/productimage/1.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="info_product">
-                                <div>
-                                    <p>Tên</p>
-                                    <p>Size</p>
-                                    <p>Số lượng</p>                                
-                                </div>
-                            </div>
-                            <div class="gia">
-                                <p>0000000</p>
-                            </div>
-                            <div class="item_cart">
-                                <div class="product_img">
-                                    <img src="image/productimage/1.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="info_product">
-                                <div>
-                                    <p>Tên</p>
-                                    <p>Size</p>
-                                    <p>Số lượng</p>                                
-                                </div>
-                            </div>
-                            <div class="gia">
-                                <p>0000000</p>
-                            </div>
-                            <div style="display:block; width: 100%; height: 0.5px; background-color: rgb(96, 96, 96); margin-bottom: 10px;"></div>
-                            <div class="huydon">
-                                <p>Tổng tiền: <span>000000000</span></p>
-                                <button>Huỷ Đơn</button>
+                                <p> <fmt:formatNumber value = "<%=od.get(j).getPrice()%>"/> &nbspVND</p>
+                                <p>Giảm: <%=od.get(j).getShoe().getSale_price()%>%<p>
+<!--                                <p><%=od.get(j).getPrice()%></p>-->
                             </div>
                             <%}}%>
-                            <%}%>
+                            <div style="display:block; width: 100%; height: 0.5px; background-color: rgb(96, 96, 96); margin-bottom: 10px;"></div>
+                            <div class="huydon">                             
+                                <p>Tổng tiền: <span><fmt:formatNumber value = "<%=o.get(i).getPrice()%>"/> &nbspVND</span></p>                              
+                                <%if(o.get(i).getStatus() == 1){%>
+                                <button>Huỷ Đơn</button>
+                                <%}%>
+                            </div>
                         </div>
-
+                        <%}%>
                     </div>
                 </div>
             </div>

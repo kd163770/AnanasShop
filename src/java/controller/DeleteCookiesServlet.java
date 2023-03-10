@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import entity.*;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 /**
@@ -25,6 +26,7 @@ public class DeleteCookiesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         ShoeDAO sd = new ShoeDAO();
         List<Shoe> lst = sd.listShoe(null);
@@ -59,6 +61,14 @@ public class DeleteCookiesServlet extends HttpServlet {
                 txt = txt + "/" + i.getShoe().getId() + ":" + i.getSize() + ":" + i.getQuantity();
             }
         }
+        
+        int n;
+        if (listItem != null) {
+            n = listItem.size();
+        } else {
+            n = 0;
+        }
+         session.setAttribute("soluong", n);
         Cookie cookie = new Cookie("cart", txt);
         cookie.setMaxAge(2 * 24 * 60 * 60);
         response.addCookie(cookie);

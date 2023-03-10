@@ -236,33 +236,45 @@
     <body>
         <header>
             <nav>
-                <i class="ti-heart"></i>
-                <a href="">Yêu thích</a>
-                <i class="ti-user"></i>
-                <a href="">Đăng nhập</a>
+                <c:if test="${sessionScope.status == 1}">
+                <i class="ti-server"></i>
+                <a href="login.jsp">Thống kê</a> 
+                </c:if>
                 <i class="ti-bag"></i>
-                <a href="">Giỏ hàng</a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng
+                    <c:if test="${sessionScope.soluong != null}">
+                        (<span>${sessionScope.soluong}</span>)
+                    </c:if></a>
+                <i class="ti-user"></i>
+                <c:choose>
+                    <c:when test="${sessionScope.name == null}">
+                        <a style="z-index: 1;" href="login.jsp">Đăng nhập</a>
+                    </c:when>
+                    <c:when test="${sessionScope.name != null}">
+                        <a href="user" class="profile" style="z-index:10; margin-right: 20px" href="">${sessionScope.name}
+                        </a>
+                    </c:when>
+                </c:choose>
             </nav>
 
             <div class="header">
                 <img src="image/logoananas.png" alt="">
-                <ul>
+                 <ul>
                     <li class="dropdown">
-                        <a href="menu.html">SẢN PHẨM</a>
+                        <a href="listshoe">SẢN PHẨM</a>       
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="menu.html">NAM</a>
+                        <a href="listshoe?gioitinh=nam">NAM</a>
 
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="menu.html">NỮ</a>
-
+                        <a href="listshoe?gioitinh=nu">NỮ</a>
                     </li>
                     <li class="line"></li>
                     <li class="dropdown">
-                        <a href="">SALE OFF</a>
+                        <a href="listshoesale">SALE OFF</a>
 
                     </li>
                     <li class="line"></li>
@@ -271,12 +283,14 @@
                     </li>
                 </ul>
 
-                <div class="search">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <button>
-                        <i class="ti-search"></i>
-                    </button>
 
+                <div class="search" style="z-index: 1">
+                    <form action="search" method="GET">
+                        <input type="text" placeholder="Tìm kiếm" name="search" value="">
+                        <button  onclick="this.form.submit()">  
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </header>
@@ -325,7 +339,7 @@
                             <a href="userchangepassword.jsp">Đổi mật khẩu &nbsp;<i class="ti-exchange-vertical"></i></a> <br />
                         </div>
                         <div>
-                            <a href="">Đơn hàng &nbsp;<i class="ti-shopping-cart-full"></i></a>
+                            <a href="usercart">Đơn hàng &nbsp;<i class="ti-shopping-cart-full"></i></a>
                         </div>
                     </div>
                     <div class="col-md-9 main">
@@ -356,6 +370,12 @@
                                     <p>Số điện thoại: </p>
                                 </div>
                                 <input style="width: 40%; height: 35px;" type="text" value="${requestScope.phonenumber}" name="phonenumber"><br />
+                            </div>
+                            <div class="row_table">
+                                <div style="display: inline-block; width: 20%; height: 20px;">
+                                    <p>Địa chỉ: </p>
+                                </div>
+                                <input style="width: 40%; height: 35px;" type="text" value="${requestScope.address}" name="phonenumber"><br />
                             </div>
                             <%String gender = (String)request.getAttribute("gender"); %>
                             <div class="row_table">
