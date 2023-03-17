@@ -127,8 +127,6 @@
                     alert("Vui lòng nhập số lượng và size giày");
                 } else if (a > b)
                 {
-                    console.log(typeof soluong.max);
-                    console.log(typeof soluong.value);
                     alert("Sản phẩm này chỉ còn " + soluong.max + " sản phẩm");
                 } else {
                     window.location = "themvaogiohang?masp=" + x + "&size=" + sizegiay + "&soluong=" + soluong.value+"&type="+s;
@@ -144,15 +142,12 @@
     <body>
         <header>
             <nav>
-                <c:if test="${sessionScope.status == 1}">
+                <c:if test="${sessionScope.vaitro == 1}">
                 <i class="ti-server"></i>
-                <a href="login.jsp">Thống kê</a> 
+                <a href="adminproduct">Thống kê</a> 
                 </c:if>
                 <i class="ti-bag"></i>
-                <a style="z-index: 1;" href="giohang">Giỏ hàng
-                    <c:if test="${sessionScope.soluong != null}">
-                        (<span>${sessionScope.soluong}</span>)
-                    </c:if></a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng</a>
                  <i class="ti-user"></i>
                 <c:choose>
                     <c:when test="${sessionScope.name == null}">
@@ -265,9 +260,8 @@
                             formatted = df.format(shoe.getPrice());
                             %>
                             <%= formatted%>&nbspVND
-                        </span><%
-                                        }%>
-                        <!--                        <form name="f" action="" method="POST">-->
+                        </span><%}%>
+            
                         <div id="size_soluong">
                             <div class="size_soluong">
                                 <h3>SIZE</h3>

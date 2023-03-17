@@ -173,14 +173,17 @@
                 height: 50px;
                 background-color: #fff;
                 display: flex;
+
             }
 
-            .navbar_cart div{
+            .navbar_cart a{
                 width: 25%;
                 height: 100%;
                 text-align: center;
                 font-size: 20px;
                 line-height: 50px;
+                text-decoration: none;
+                color: black;
             }
             footer {
                 height: 400px;
@@ -299,12 +302,8 @@
                 border: 0;
                 color: white;
             }
-            .nav_child a{
-                text-decoration: none;
-                color: black;
-            }
         </style>
-        <script>
+<!--        <script>
             function navbar(x) {
                 var list = document.getElementsByClassName("nav_child");
                 for (var i = 0; i < list.length; i++) {
@@ -314,7 +313,7 @@
                         list[i].style.borderBottom = '0px';
                 }
             }
-        </script>
+        </script>-->
 
         <%
             List<Order> o = (List<Order>)request.getAttribute("order");
@@ -326,8 +325,8 @@
         <header>
             <nav>
                 <c:if test="${sessionScope.status == 1}">
-                <i class="ti-server"></i>
-                <a href="login.jsp">Thống kê</a> 
+                    <i class="ti-server"></i>
+                    <a href="login.jsp">Thống kê</a> 
                 </c:if>
                 <i class="ti-bag"></i>
                 <a style="z-index: 1;" href="giohang">Giỏ hàng
@@ -348,7 +347,7 @@
 
             <div class="header">
                 <img src="image/logoananas.png" alt="">
-                 <ul>
+                <ul>
                     <li class="dropdown">
                         <a href="listshoe">SẢN PHẨM</a>       
                     </li>
@@ -434,10 +433,18 @@
                     <div class="col-md-9 main">
                         <form action="">
                             <div class="navbar_cart">
-                                <div class="nav_child" onclick="navbar(0)"><a>Tất cả</a></div>
-                                <div class="nav_child" onclick="navbar(1)"><a>Đang giao</a></div>
-                                <div class="nav_child" onclick="navbar(2)"><a>Hoàn thành</a></div>
-                                <div class="nav_child" onclick="navbar(3)"><a>Đã huỷ</a></div>                    
+                                <a href="usercart" class="nav_child" onclick="navbar(0)" <c:if test="${requestScope.status == 0}">
+                                   style="border-bottom: 2px #ff5f17 solid;"
+                                </c:if>>Tất cả</a>
+                                <a href="usercart?status=2" class="nav_child" onclick="navbar(1)" <c:if test="${requestScope.status == 2}">
+                                   style="border-bottom: 2px #ff5f17 solid;"
+                                </c:if>>Đang giao</a>
+                                <a href="usercart?status=3" class="nav_child" onclick="navbar(2)" <c:if test="${requestScope.status == 3}">
+                                   style="border-bottom: 2px #ff5f17 solid;"
+                                </c:if>>Hoàn thành</a>
+                                <a href="usercart?status=4" class="nav_child" onclick="navbar(3)" <c:if test="${requestScope.status == 4}">
+                                   style="border-bottom: 2px #ff5f17 solid;"
+                                </c:if>>Đã huỷ</a>                   
                             </div>
                         </form>
                         <%
@@ -452,8 +459,10 @@
                                 <h4>ĐANG XỬ LÝ</h4>
                                 <%}else if(o.get(i).getStatus() == 2){%>
                                 <h4>ĐANG GIAO HÀNG</h4>
-                                <%}else{%>
+                                <%}else if(o.get(i).getStatus() == 3){%>
                                 <h4>HOÀN THÀNH</h4>
+                                <%}else if(o.get(i).getStatus() == 4){%>
+                                <h4>ĐÃ HUỶ</h4>
                                 <%}%>
                             </div>
 
@@ -484,7 +493,10 @@
                             <div class="huydon">                             
                                 <p>Tổng tiền: <span><fmt:formatNumber value = "<%=o.get(i).getPrice()%>"/> &nbspVND</span></p>                              
                                 <%if(o.get(i).getStatus() == 1){%>
-                                <button>Huỷ Đơn</button>
+                                <form action="cancleorder">
+                                    <input type="hidden" name="orderid" value="<%=o.get(i).getId()%>">
+                                    <button>Huỷ Đơn</button>
+                                </form>
                                 <%}%>
                             </div>
                         </div>

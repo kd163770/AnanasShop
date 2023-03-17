@@ -58,7 +58,7 @@ public class OrderDetailsDAO extends DBContext{
     
     public List<String> listBestSeller(String gioitinh) {
         List<String> s = new ArrayList();
-        String sql = "select top(3) od.masp, count(od.masp)  from [order details] od inner join san_pham sp on od.masp = sp.masp where gioi_tinh <> ? group by od.masp";
+        String sql = "select top(10) od.masp, count(od.masp)  from [order details] od inner join san_pham sp on od.masp = sp.masp where gioi_tinh <> ? group by od.masp";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);

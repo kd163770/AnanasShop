@@ -20,6 +20,8 @@ public class Customer {
     private String email;
     private int vai_tro;
     private String dia_chi;
+    private boolean status;
+    private double chitieu;
     public Customer() {
     }
 
@@ -105,6 +107,22 @@ public class Customer {
 
     public void setDia_chi(String dia_chi) {
         this.dia_chi = dia_chi;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public double getChitieu() {
+        return chitieu;
+    }
+
+    public void setChitieu(double chitieu) {
+        this.chitieu = chitieu;
     }
 
     

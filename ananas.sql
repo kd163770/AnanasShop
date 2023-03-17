@@ -556,3 +556,7 @@ select [order details].masp, san_pham.gioi_tinh from [order details] inner join 
 select top(3) od.masp, count(od.masp)  from [order details] od inner join san_pham sp on od.masp = sp.masp where gioi_tinh <> 'NU' group by od.masp
 
 Select * from san_pham where gia_sale <> 0
+
+update orders set Trang_Thai = 4 where id = 5	
+
+update orders set  id = 2  where Trang_Thai = 2

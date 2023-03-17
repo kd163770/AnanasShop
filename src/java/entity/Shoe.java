@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -18,6 +20,7 @@ public class Shoe {
     int loai_giay;
     String mau_sac;
     String gioi_tinh;
+    Date ngay_ra_mat;
 
     public Shoe() {
     }
@@ -113,6 +116,14 @@ public class Shoe {
 
     public void setMau_sac(String mau_sac) {
         this.mau_sac = mau_sac;
+    }
+
+    public Date getNgay_ra_mat() {
+        return ngay_ra_mat;
+    }
+
+    public void setNgay_ra_mat(Date ngay_ra_mat) {
+        this.ngay_ra_mat = ngay_ra_mat;
     }
     
 

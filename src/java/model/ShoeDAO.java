@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import entity.*;
+import java.sql.Date;
 
 /**
  *
@@ -17,6 +18,8 @@ import entity.*;
  */
 public class ShoeDAO extends DBContext {
 
+    
+    //list danh sach giay voi gioi tinh
     public List<Shoe> listShoe(String gt) {
         List<Shoe> s = new ArrayList();
         String sql;
@@ -51,6 +54,20 @@ public class ShoeDAO extends DBContext {
             e.printStackTrace();
         }
         return s;
+    }
+    
+    public int countShoe() {
+        String sql = "Select COUNT(*) from san_pham";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
      
@@ -152,8 +169,10 @@ public class ShoeDAO extends DBContext {
                 d.setLargest_size(rs.getInt("biggest_size"));
                 d.setSale_price(rs.getDouble("gia_sale"));
                 d.setLoai_giay(rs.getInt("loai_giay"));
+                d.setKieu_dang(rs.getInt("kieu_dang"));
                 d.setGioi_tinh(rs.getString("gioi_tinh"));
                 d.setMau_sac(rs.getString("mau_sac"));
+                d.setNgay_ra_mat(rs.getDate("ngay_ra_mat"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -309,9 +328,126 @@ public class ShoeDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
+    
+    public int countShoes(int loaigiay, int kieudang, String gender) {
+        String sql = "Select COUNT(*) from san_pham where 1=1";
+        if(loaigiay != 0){
+            sql = sql + " and loai_giay = " + loaigiay;
+        }
+        if(kieudang != 0){
+            sql = sql + " and kieu_dang = " + kieudang;
+        }
+        if(gender.equals("") == false && gender.equals("null") == false){
+            sql = sql + " and gioi_tinh = '" + gender + "'";
+        }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt(1));
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(sql);
+        return 0;
+    }
+    //, 
+    public List<Shoe> listAdminShoe(int index, String orderby, String order, int loaigiay, int kieudang, String gender) {
+        List<Shoe> lst = new ArrayList();
+        String sqls = "(select ROW_NUMBER() over (order by "+ orderby +" "+ order+") as r, * from san_pham where 1=1";
+        if(loaigiay != 0){
+            sqls = sqls + " and loai_giay = " + loaigiay;
+        }
+        if(kieudang != 0){
+            sqls = sqls + " and kieu_dang = " + kieudang;
+        }
+        if(gender.equals("") == false && gender.equals("null") == false){
+            sqls = sqls + " and gioi_tinh = '" + gender + "'";
+        }
+        String sql = "select * from \n"
+                + sqls +")as x \n"
+                + "where r between ?*10-9 and ?*10";  
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            st.setInt(2, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Shoe d = new Shoe();
+                d.setId(rs.getString("MASP"));
+                d.setName(rs.getString("name"));
+                d.setPrice(rs.getDouble("gia_tien"));
+                d.setSale_price(rs.getDouble("gia_sale"));
+                d.setSmallest_size(rs.getInt("smallest_size"));
+                d.setLargest_size(rs.getInt("biggest_size"));
+                d.setSale_price(rs.getDouble("gia_sale"));
+                d.setLoai_giay(rs.getInt("loai_giay"));
+                d.setKieu_dang(rs.getInt("kieu_dang"));
+                d.setGioi_tinh(rs.getString("gioi_tinh"));
+                d.setMau_sac(rs.getString("mau_sac"));
+                d.setNgay_ra_mat(rs.getDate("ngay_ra_mat"));
+                lst.add(d);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println(lst.get(i).getId());
+        }
+        System.out.println(sql);
+        return lst;
+    }
+    
+    public void insertProduct(String masp, String name, int price, int sale, String gender, String color, Date ngay_ra_mat, int loaigiay, int kieudang, int smallest_size, int biggest_size){
+        String sql = "insert into san_pham(MASP, name, smallest_size, biggest_size, gia_tien, gia_sale, kieu_dang, loai_giay, gioi_tinh, mau_sac, ngay_ra_mat)\n" +
+"values	(?,?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, masp);
+            st.setString(2, name);
+            st.setInt(3, smallest_size);
+            st.setInt(4, biggest_size);
+            st.setInt(5, price);
+            st.setInt(6, sale);
+            st.setInt(7, kieudang);
+            st.setInt(8, loaigiay);
+            st.setString(9, gender);
+            st.setString(10, color);
+            st.setDate(11, ngay_ra_mat);
+            
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateProduct(String name, int bigsize, int smallsize, double gia_tien, double giasale, int loaigiay, int kieudang, String gioitinh, String masp, String color){
+        String sql = "update san_pham set name = ?, smallest_size = ?, biggest_size = ?, gia_tien = ?, gia_sale = ?, kieu_dang = ?, loai_giay = ?, gioi_tinh = ?, mau_sac = ?\n" +
+        "where masp = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setInt(2, smallsize);
+            st.setInt(3, bigsize);
+            st.setDouble(4, gia_tien);
+            st.setDouble(5, giasale);
+            st.setInt(6, kieudang);
+            st.setInt(7, loaigiay);
+            st.setString(8, gioitinh);
+            st.setString(9, color);
+            st.setString(10, masp);
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
-        ShoeDAO sh = new ShoeDAO();
-        List<Shoe> s = sh.listSaleShoe("NAM");
-        
+        ShoeDAO shoedao = new ShoeDAO();
+        shoedao.listAdminShoe(1, "masp", "asc", 1, 0, "");
     }
 }

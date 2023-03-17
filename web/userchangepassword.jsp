@@ -238,7 +238,7 @@
         <nav>
             <c:if test="${sessionScope.status == 1}">
                 <i class="ti-server"></i>
-                <a href="login.jsp">Thống kê</a> 
+                <a href="adminproduct">Thống kê</a> 
                 </c:if>
                 <i class="ti-bag"></i>
                 <a style="z-index: 1;" href="giohang">Giỏ hàng

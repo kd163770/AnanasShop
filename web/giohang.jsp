@@ -36,6 +36,9 @@
                 window.location="processcart?masp="+x+"&size="+y+"&quantity="+z;
                 }
             }
+            function changesize(x,y,z,k){
+                window.location="changesizeincart?masp="+x+"&size="+y+"&quantity="+z+"&oldsize="+k;
+            }
         </script>
     </head>
     <%
@@ -50,13 +53,10 @@
             <nav>
                 <c:if test="${sessionScope.status == 1}">
                 <i class="ti-server"></i>
-                <a href="login.jsp">Thống kê</a> 
+                <a href="adminproduct">Thống kê</a> 
                 </c:if>
                 <i class="ti-bag"></i>
-                <a style="z-index: 1;" href="giohang">Giỏ hàng
-                    <c:if test="${sessionScope.soluong != null}">
-                        (<span>${sessionScope.soluong}</span>)
-                    </c:if></a>
+                <a style="z-index: 1;" href="giohang">Giỏ hàng</a>
                 <i class="ti-user"></i>
                 <c:choose>
                     <c:when test="${sessionScope.name == null}">
@@ -177,7 +177,7 @@
                                         <div class="gia-soluong">
                                             <div id="gia" style="display: inline-block;">
                                                 <p>Size</p>
-                                                <select name="" id="" style="width: 150px; height: 30px;">
+                                                <select name="" id="" style="width: 150px; height: 30px;" onchange="changesize('<%=i.getShoe().getId()%>', this.value, '<%=i.getQuantity()%>', '<%=i.getSize()%>')">
                                                     <%for(int k = i.getShoe().getSmallest_size(); k<=i.getShoe().getLargest_size(); k++){
                                                     %>
                                                     <option value="<%=k%>"
@@ -240,7 +240,7 @@
                             <p style='color:#ff5f17'>
                                 <fmt:formatNumber    value = "${requestScope.totalmoney}"/> &nbspVND</p>
                         </div>
-                        <form method="post" action="giohang">
+                        <form method="post" action="checkout">
                         <button style="width: 100%; height: 50px; background-color: #ff5f17; border: 0; color: #fff; font-size: 16px; font-weight: 600;margin-top: 20px;">TIẾP TỤC THANH TOÁN</button>
                         </form>
                     </div>

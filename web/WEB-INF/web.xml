@@ -2,91 +2,167 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ListShoeServlet</servlet-name>
-        <servlet-class>controller.ListShoeServlet</servlet-class>
+        <servlet-class>controller.Customer.ListShoeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>controller.SearchServlet</servlet-class>
+        <servlet-class>controller.Customer.SearchServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AllInBlackServlet</servlet-name>
-        <servlet-class>controller.AllInBlackServlet</servlet-class>
+        <servlet-class>controller.Customer.AllInBlackServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PhanLoaiGiayServlet</servlet-name>
-        <servlet-class>controller.PhanLoaiGiayServlet</servlet-class>
+        <servlet-class>controller.Customer.PhanLoaiGiayServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>controller.ProductServlet</servlet-class>
+        <servlet-class>controller.Customer.ProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SoLuongServlet</servlet-name>
-        <servlet-class>controller.SoLuongServlet</servlet-class>
+        <servlet-class>controller.Customer.SoLuongServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
+        <servlet-class>controller.Customer.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GioHangServlet</servlet-name>
-        <servlet-class>controller.GioHangServlet</servlet-class>
+        <servlet-class>controller.Customer.GioHangServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCookiesServlet</servlet-name>
-        <servlet-class>controller.DeleteCookiesServlet</servlet-class>
+        <servlet-class>controller.Customer.DeleteCookiesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProcessCartServlet</servlet-name>
-        <servlet-class>controller.ProcessCartServlet</servlet-class>
+        <servlet-class>controller.Customer.ProcessCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListLoaiGiay</servlet-name>
-        <servlet-class>controller.ListLoaiGiay</servlet-class>
+        <servlet-class>controller.Customer.ListLoaiGiay</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>saleshoe</servlet-name>
-        <servlet-class>controller.ListSaleShoe</servlet-class>
+        <servlet-class>controller.Customer.ListSaleShoe</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NewArrivalsServlet</servlet-name>
-        <servlet-class>controller.NewArrivalsServlet</servlet-class>
+        <servlet-class>controller.Customer.NewArrivalsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
-        <servlet-class>controller.ChangePasswordServlet</servlet-class>
+        <servlet-class>controller.Customer.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DangKyServlet</servlet-name>
-        <servlet-class>controller.DangKyServlet</servlet-class>
+        <servlet-class>controller.Customer.DangKyServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetUserInformationServlet</servlet-name>
-        <servlet-class>controller.GetUserInformationServlet</servlet-class>
+        <servlet-class>controller.Customer.GetUserInformationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateUserInfoServlet</servlet-name>
-        <servlet-class>controller.UpdateUserInfoServlet</servlet-class>
+        <servlet-class>controller.Customer.UpdateUserInfoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>controller.LogOutServlet</servlet-class>
+        <servlet-class>controller.Customer.LogOutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserChangePasswordServlet</servlet-name>
-        <servlet-class>controller.UserChangePasswordServlet</servlet-class>
+        <servlet-class>controller.Customer.UserChangePasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HoanTatThanhToanServlet</servlet-name>
-        <servlet-class>controller.HoanTatThanhToanServlet</servlet-class>
+        <servlet-class>controller.Customer.HoanTatThanhToanServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserCartServlet</servlet-name>
-        <servlet-class>controller.UserCartServlet</servlet-class>
+        <servlet-class>controller.Customer.UserCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BestSellerServlet</servlet-name>
-        <servlet-class>controller.BestSellerServlet</servlet-class>
+        <servlet-class>controller.Customer.BestSellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancleServlet</servlet-name>
+        <servlet-class>controller.Customer.CancleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <servlet-class>controller.admin.AdminProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditLoaiGiay</servlet-name>
+        <servlet-class>controller.admin.EditLoaiGiay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddLoaiGiaySerlvet</servlet-name>
+        <servlet-class>controller.admin.AddLoaiGiaySerlvet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditKieuDangServlet</servlet-name>
+        <servlet-class>controller.admin.EditKieuDangServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddKieuDangServlet</servlet-name>
+        <servlet-class>controller.admin.AddKieuDangServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteLoaiGiayServlet</servlet-name>
+        <servlet-class>controller.admin.DeleteLoaiGiayServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteKieuDangServlet</servlet-name>
+        <servlet-class>controller.admin.DeleteKieuDangServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminShoeServlet</servlet-name>
+        <servlet-class>controller.admin.AdminShoeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailsServlet</servlet-name>
+        <servlet-class>controller.admin.ProductDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertProductServlet</servlet-name>
+        <servlet-class>controller.admin.InsertProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSoLuongServlet</servlet-name>
+        <servlet-class>controller.admin.UpdateSoLuongServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>controller.admin.AdminOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusServlet</servlet-name>
+        <servlet-class>controller.admin.UpdateStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderdetailsServlet</servlet-name>
+        <servlet-class>controller.admin.OrderdetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountServlet</servlet-name>
+        <servlet-class>controller.admin.AdminAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountStatusServlet</servlet-name>
+        <servlet-class>controller.admin.UpdateAccountStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>controller.Customer.CheckOutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeSizeInCartServlet</servlet-name>
+        <servlet-class>controller.Customer.ChangeSizeInCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListShoeServlet</servlet-name>
@@ -175,6 +251,82 @@
     <servlet-mapping>
         <servlet-name>BestSellerServlet</servlet-name>
         <url-pattern>/bestseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancleServlet</servlet-name>
+        <url-pattern>/cancleorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <url-pattern>/adminproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditLoaiGiay</servlet-name>
+        <url-pattern>/editloaigiay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddLoaiGiaySerlvet</servlet-name>
+        <url-pattern>/addloaigiay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditKieuDangServlet</servlet-name>
+        <url-pattern>/editkieudang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddKieuDangServlet</servlet-name>
+        <url-pattern>/addkieudang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLoaiGiayServlet</servlet-name>
+        <url-pattern>/deleteloaigiay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteKieuDangServlet</servlet-name>
+        <url-pattern>/deletekieudang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminShoeServlet</servlet-name>
+        <url-pattern>/adminshoe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailsServlet</servlet-name>
+        <url-pattern>/productdetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertProductServlet</servlet-name>
+        <url-pattern>/insertproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSoLuongServlet</servlet-name>
+        <url-pattern>/updatesoluong</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/adminorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusServlet</servlet-name>
+        <url-pattern>/updatestatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderdetailsServlet</servlet-name>
+        <url-pattern>/orderdetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountServlet</servlet-name>
+        <url-pattern>/adminaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountStatusServlet</servlet-name>
+        <url-pattern>/updateaccountstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSizeInCartServlet</servlet-name>
+        <url-pattern>/changesizeincart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,6 +11,7 @@ package entity;
 public class KieuDang {
     private int id;
     private String name;
+    private int quantity;
 
     public KieuDang() {
     }
@@ -34,6 +35,14 @@ public class KieuDang {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
     
 }
