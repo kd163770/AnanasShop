@@ -68,7 +68,8 @@ public class BestSellerServlet extends HttpServlet {
         String gt = request.getParameter("gioitinh");
 
         List<String> lstr = od.listBestSeller(gt);
-        List<Shoe> lst = new ArrayList();
+        List<Shoe> lst = new ArrayList<>();
+        
         for (String st : lstr) {
             Shoe shoe = u.searchProduct(st);
             lst.add(shoe);

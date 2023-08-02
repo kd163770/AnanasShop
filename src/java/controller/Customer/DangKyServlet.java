@@ -61,7 +61,7 @@ public class DangKyServlet extends HttpServlet {
         ValidateInput input = new ValidateInput();
         String xusername = lg.searchUserName(username);
         if (xusername.equals("") == false || input.inputUserName(username) == false ||  input.inputPassword(fpassword) == false
-                || fpassword.trim().equals(spassword.trim()) == false || fpassword.trim().equals(spassword.trim()) == false || input.inputEmail(email) == false
+                || fpassword.trim().equals(spassword.trim()) == false || input.inputEmail(email) == false
                 || input.inputPhoneNumber(phonenumber) == false) {
             String erruser = "";
             String erremail="";

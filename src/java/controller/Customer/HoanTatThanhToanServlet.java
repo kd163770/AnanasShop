@@ -25,16 +25,9 @@ import model.*;
 public class HoanTatThanhToanServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        processRequest(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("name");
         String name = request.getParameter("name");
@@ -44,7 +37,7 @@ public class HoanTatThanhToanServlet extends HttpServlet {
         String typeofpurchase = request.getParameter("typeopurchase");
         int purchasemethod = Integer.parseInt(typeofpurchase);
         Date orderdate = new Date(System.currentTimeMillis());
-        if (name == null || name.equals("") || name.equals("") || email == null || email.equals("")
+        if (name == null || name.equals("") || email == null || email.equals("")
                 || phonenumber == null || phonenumber.equals("")) {
             String err = "Vui lòng nhập đầy đủ thông tin!";
             request.setAttribute("err", err);
@@ -53,7 +46,7 @@ public class HoanTatThanhToanServlet extends HttpServlet {
             ShoeDAO sd = new ShoeDAO();
             List<Shoe> lst = sd.listShoe(null);
             Cookie[] arr = request.getCookies();
-//            CustomerDAO cd = new CustomerDAO();
+
             String txt = "";
             if (arr != null) {
                 for (Cookie o : arr) {

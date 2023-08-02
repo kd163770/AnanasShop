@@ -46,7 +46,6 @@ public class GioHangServlet extends HttpServlet {
         double totalMoney = cart.getTotalMoney();
         
         request.setAttribute("lst", listItem);
-//        request.setAttribute("size", n);
         request.setAttribute("salemoney", saleMoney);
         request.setAttribute("realmoney", realMoney);
         request.setAttribute("totalmoney", totalMoney);
