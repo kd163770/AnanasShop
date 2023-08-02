@@ -7,7 +7,7 @@ This project is an shoe selling website developed using JSP/ Servlet. This produ
 - Đào Quang Khải
 ## Features
 
-📚 Course Management:
+📚 Shoe Management:
 - Users can browse through a catalog of shoes offered.
 - Shoe details are displayed, including product information, regulations on exchange products, How is the warranty?
 - Users can add the favourite shoes to cart.
